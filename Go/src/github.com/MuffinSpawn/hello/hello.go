@@ -20,7 +20,7 @@ func main() {
 	    fmt.Println(input.Text)
 	    */
 
-	    _, err := Copy(arguments.files[0], arguments.files[1])
+	    _, err := copy(arguments.files[0], arguments.files[1])
 	    if err != nil {
 	    	fmt.Printf("Copy failed. %v\n", err)
 	    }
@@ -43,14 +43,14 @@ func parse_command_line_arguments() Arguments {
 }
 
 
-func Copy(src, dst string) (uint64, error) {
+func copy(src, dst string) (uint64, error) {
     var bytes_copied int64 = 0
     var is_regular_file bool
     var err error
     var source *os.File
     var destination *os.File
 
-    is_regular_file, err = IsRegularFile(src)
+    is_regular_file, err = is_regular_file(src)
 
     if is_regular_file {
 	    source, err = os.Open(src)
@@ -58,7 +58,7 @@ func Copy(src, dst string) (uint64, error) {
 
     if err == nil {
 	    defer source.Close()
-	    is_regular_file, err = IsRegularFile(dst)
+	    is_regular_file, err = is_regular_file(dst)
     }
 
     if is_regular_file {
@@ -76,7 +76,7 @@ func Copy(src, dst string) (uint64, error) {
 }
 
 
-func IsRegularFile(file string) (bool, error) {
+func is_regular_file(file string) (bool, error) {
 	is_regular_file :=  false
 	var err error = nil
     source_file_stats, err := os.Stat(file)
