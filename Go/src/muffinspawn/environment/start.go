@@ -52,7 +52,7 @@ func os_specific_command_paths(base_path string) (shell_path, command_path strin
 
 func windows_command_paths(base_path string) (shell_path, command_path string, err error) {
 	shell_path, err = exec.LookPath("PowerShell.exe")
-	command_path = base_path + string(os.PathSeparator) + "Scripts" + string(os.PathSeparator) + "activate.bat"
+	command_path = base_path + string(os.PathSeparator) + "Scripts" + string(os.PathSeparator) + "Activate.ps1"
 
 	return
 }
